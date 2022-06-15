@@ -1,0 +1,11 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "com.mk.ad.utils.CosUtils",
+      "name": "tencent",
+      "type": "com.mk.ad.utils.CosUtils"
+    }
+  ],
+  "properties": []
+}

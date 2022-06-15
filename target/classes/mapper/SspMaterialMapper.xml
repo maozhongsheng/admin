@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mk.ad.mapper.SspMaterialMapper">
+  <resultMap id="BaseResultMap" type="com.mk.ad.vo.SspMaterial">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="upper_id" jdbcType="INTEGER" property="upper_id" />
+    <result column="upper_name" jdbcType="VARCHAR" property="upper_name" />
+    <result column="upper_slot_id" jdbcType="INTEGER" property="upper_slot_id" />
+    <result column="upper_slot_name" jdbcType="VARCHAR" property="upper_slot_name" />
+    <result column="keywords" jdbcType="VARCHAR" property="keywords" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="material" jdbcType="VARCHAR" property="material" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="material_w" jdbcType="INTEGER" property="material_w" />
+    <result column="material_h" jdbcType="INTEGER" property="material_h" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, upper_id, upper_name, upper_slot_id, upper_slot_name, keywords, `type`, material, 
+    `status`, material_w, material_h, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.mk.ad.vo.SspMaterialExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from ssp_material
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ssp_material
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ssp_material
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mk.ad.vo.SspMaterialExample">
+    delete from ssp_material
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mk.ad.vo.SspMaterial" useGeneratedKeys="true">
+    insert into ssp_material (upper_id, upper_name, upper_slot_id, 
+      upper_slot_name, keywords, `type`, 
+      material, `status`, material_w, 
+      material_h, create_time)
+    values (#{upper_id,jdbcType=INTEGER}, #{upper_name,jdbcType=VARCHAR}, #{upper_slot_id,jdbcType=INTEGER}, 
+      #{upper_slot_name,jdbcType=VARCHAR}, #{keywords,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
+      #{material,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{material_w,jdbcType=INTEGER}, 
+      #{material_h,jdbcType=INTEGER}, #{create_time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mk.ad.vo.SspMaterial" useGeneratedKeys="true">
+    insert into ssp_material
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="upper_id != null">
+        upper_id,
+      </if>
+      <if test="upper_name != null">
+        upper_name,
+      </if>
+      <if test="upper_slot_id != null">
+        upper_slot_id,
+      </if>
+      <if test="upper_slot_name != null">
+        upper_slot_name,
+      </if>
+      <if test="keywords != null">
+        keywords,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="material != null">
+        material,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="material_w != null">
+        material_w,
+      </if>
+      <if test="material_h != null">
+        material_h,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="upper_id != null">
+        #{upper_id,jdbcType=INTEGER},
+      </if>
+      <if test="upper_name != null">
+        #{upper_name,jdbcType=VARCHAR},
+      </if>
+      <if test="upper_slot_id != null">
+        #{upper_slot_id,jdbcType=INTEGER},
+      </if>
+      <if test="upper_slot_name != null">
+        #{upper_slot_name,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null">
+        #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="material != null">
+        #{material,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="material_w != null">
+        #{material_w,jdbcType=INTEGER},
+      </if>
+      <if test="material_h != null">
+        #{material_h,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mk.ad.vo.SspMaterialExample" resultType="java.lang.Long">
+    select count(*) from ssp_material
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update ssp_material
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.upper_id != null">
+        upper_id = #{record.upper_id,jdbcType=INTEGER},
+      </if>
+      <if test="record.upper_name != null">
+        upper_name = #{record.upper_name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.upper_slot_id != null">
+        upper_slot_id = #{record.upper_slot_id,jdbcType=INTEGER},
+      </if>
+      <if test="record.upper_slot_name != null">
+        upper_slot_name = #{record.upper_slot_name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.keywords != null">
+        keywords = #{record.keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="record.type != null">
+        `type` = #{record.type,jdbcType=INTEGER},
+      </if>
+      <if test="record.material != null">
+        material = #{record.material,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.material_w != null">
+        material_w = #{record.material_w,jdbcType=INTEGER},
+      </if>
+      <if test="record.material_h != null">
+        material_h = #{record.material_h,jdbcType=INTEGER},
+      </if>
+      <if test="record.create_time != null">
+        create_time = #{record.create_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update ssp_material
+    set id = #{record.id,jdbcType=INTEGER},
+      upper_id = #{record.upper_id,jdbcType=INTEGER},
+      upper_name = #{record.upper_name,jdbcType=VARCHAR},
+      upper_slot_id = #{record.upper_slot_id,jdbcType=INTEGER},
+      upper_slot_name = #{record.upper_slot_name,jdbcType=VARCHAR},
+      keywords = #{record.keywords,jdbcType=VARCHAR},
+      `type` = #{record.type,jdbcType=INTEGER},
+      material = #{record.material,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=INTEGER},
+      material_w = #{record.material_w,jdbcType=INTEGER},
+      material_h = #{record.material_h,jdbcType=INTEGER},
+      create_time = #{record.create_time,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mk.ad.vo.SspMaterial">
+    update ssp_material
+    <set>
+      <if test="upper_id != null">
+        upper_id = #{upper_id,jdbcType=INTEGER},
+      </if>
+      <if test="upper_name != null">
+        upper_name = #{upper_name,jdbcType=VARCHAR},
+      </if>
+      <if test="upper_slot_id != null">
+        upper_slot_id = #{upper_slot_id,jdbcType=INTEGER},
+      </if>
+      <if test="upper_slot_name != null">
+        upper_slot_name = #{upper_slot_name,jdbcType=VARCHAR},
+      </if>
+      <if test="keywords != null">
+        keywords = #{keywords,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="material != null">
+        material = #{material,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="material_w != null">
+        material_w = #{material_w,jdbcType=INTEGER},
+      </if>
+      <if test="material_h != null">
+        material_h = #{material_h,jdbcType=INTEGER},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mk.ad.vo.SspMaterial">
+    update ssp_material
+    set upper_id = #{upper_id,jdbcType=INTEGER},
+      upper_name = #{upper_name,jdbcType=VARCHAR},
+      upper_slot_id = #{upper_slot_id,jdbcType=INTEGER},
+      upper_slot_name = #{upper_slot_name,jdbcType=VARCHAR},
+      keywords = #{keywords,jdbcType=VARCHAR},
+      `type` = #{type,jdbcType=INTEGER},
+      material = #{material,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=INTEGER},
+      material_w = #{material_w,jdbcType=INTEGER},
+      material_h = #{material_h,jdbcType=INTEGER},
+      create_time = #{create_time,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

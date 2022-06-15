@@ -1,0 +1,538 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mk.ad.mapper.AdminSspAccountMapper">
+  <resultMap id="BaseResultMap" type="com.mk.ad.vo.AdminSspAccount">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="user_id" />
+    <result column="company_name" jdbcType="VARCHAR" property="company_name" />
+    <result column="company_abbreviation" jdbcType="VARCHAR" property="company_abbreviation" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="company_type" jdbcType="INTEGER" property="company_type" />
+    <result column="license_number" jdbcType="VARCHAR" property="license_number" />
+    <result column="due_date" jdbcType="TIMESTAMP" property="due_date" />
+    <result column="organization_code" jdbcType="VARCHAR" property="organization_code" />
+    <result column="shareholder" jdbcType="VARCHAR" property="shareholder" />
+    <result column="license_image" jdbcType="VARCHAR" property="license_image" />
+    <result column="docking_way" jdbcType="INTEGER" property="docking_way" />
+    <result column="settlement_way" jdbcType="INTEGER" property="settlement_way" />
+    <result column="profit" jdbcType="VARCHAR" property="profit" />
+    <result column="payee" jdbcType="VARCHAR" property="payee" />
+    <result column="bank_deposit" jdbcType="VARCHAR" property="bank_deposit" />
+    <result column="bank_account" jdbcType="VARCHAR" property="bank_account" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="update_time" />
+    <result column="last_time" jdbcType="TIMESTAMP" property="last_time" />
+    <result column="is_deleted" jdbcType="INTEGER" property="is_deleted" />
+    <result column="enable_status" jdbcType="INTEGER" property="enable_status" />
+    <result column="ssp_id" jdbcType="BIGINT" property="ssp_id" />
+    <result column="refuse" jdbcType="VARCHAR" property="refuse" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, user_id, company_abbreviation, company_name, `status`, company_type, license_number, due_date, organization_code,
+    shareholder, license_image, docking_way, settlement_way, profit, payee, bank_deposit, 
+    bank_account, create_time, update_time, last_time, is_deleted, enable_status, ssp_id, 
+    refuse
+  </sql>
+  <select id="selectByExample" parameterType="com.mk.ad.vo.AdminSspAccountExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from admin_ssp_account
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from admin_ssp_account
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from admin_ssp_account
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mk.ad.vo.AdminSspAccountExample">
+    delete from admin_ssp_account
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mk.ad.vo.AdminSspAccount" useGeneratedKeys="true">
+    insert into admin_ssp_account (user_id, company_abbreviation, company_name, `status`,
+      company_type, license_number, due_date, 
+      organization_code, shareholder, license_image, 
+      docking_way, settlement_way, profit, 
+      payee, bank_deposit, bank_account, 
+      create_time, update_time, last_time, 
+      is_deleted, enable_status, ssp_id, 
+      refuse)
+    values (#{user_id,jdbcType=VARCHAR},  #{company_abbreviation,jdbcType=VARCHAR}, #{company_name,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
+      #{company_type,jdbcType=INTEGER}, #{license_number,jdbcType=VARCHAR}, #{due_date,jdbcType=TIMESTAMP}, 
+      #{organization_code,jdbcType=VARCHAR}, #{shareholder,jdbcType=VARCHAR}, #{license_image,jdbcType=VARCHAR}, 
+      #{docking_way,jdbcType=INTEGER}, #{settlement_way,jdbcType=INTEGER}, #{profit,jdbcType=VARCHAR}, 
+      #{payee,jdbcType=VARCHAR}, #{bank_deposit,jdbcType=VARCHAR}, #{bank_account,jdbcType=VARCHAR}, 
+      #{create_time,jdbcType=TIMESTAMP}, #{update_time,jdbcType=TIMESTAMP}, #{last_time,jdbcType=TIMESTAMP}, 
+      #{is_deleted,jdbcType=INTEGER}, #{enable_status,jdbcType=INTEGER}, #{ssp_id,jdbcType=BIGINT}, 
+      #{refuse,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mk.ad.vo.AdminSspAccount" useGeneratedKeys="true">
+    insert into admin_ssp_account
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="user_id != null">
+        user_id,
+      </if>
+      <if test="company_name != null">
+        company_name,
+      </if>
+      <if test="company_abbreviation != null">
+        company_abbreviation,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="company_type != null">
+        company_type,
+      </if>
+      <if test="license_number != null">
+        license_number,
+      </if>
+      <if test="due_date != null">
+        due_date,
+      </if>
+      <if test="organization_code != null">
+        organization_code,
+      </if>
+      <if test="shareholder != null">
+        shareholder,
+      </if>
+      <if test="license_image != null">
+        license_image,
+      </if>
+      <if test="docking_way != null">
+        docking_way,
+      </if>
+      <if test="settlement_way != null">
+        settlement_way,
+      </if>
+      <if test="profit != null">
+        profit,
+      </if>
+      <if test="payee != null">
+        payee,
+      </if>
+      <if test="bank_deposit != null">
+        bank_deposit,
+      </if>
+      <if test="bank_account != null">
+        bank_account,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+      <if test="update_time != null">
+        update_time,
+      </if>
+      <if test="last_time != null">
+        last_time,
+      </if>
+      <if test="is_deleted != null">
+        is_deleted,
+      </if>
+      <if test="enable_status != null">
+        enable_status,
+      </if>
+      <if test="ssp_id != null">
+        ssp_id,
+      </if>
+      <if test="refuse != null">
+        refuse,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="user_id != null">
+        #{user_id,jdbcType=VARCHAR},
+      </if>
+      <if test="company_name != null">
+        #{company_name,jdbcType=VARCHAR},
+      </if>
+      <if test="company_abbreviation != null">
+        #{company_abbreviation,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="company_type != null">
+        #{company_type,jdbcType=INTEGER},
+      </if>
+      <if test="license_number != null">
+        #{license_number,jdbcType=VARCHAR},
+      </if>
+      <if test="due_date != null">
+        #{due_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="organization_code != null">
+        #{organization_code,jdbcType=VARCHAR},
+      </if>
+      <if test="shareholder != null">
+        #{shareholder,jdbcType=VARCHAR},
+      </if>
+      <if test="license_image != null">
+        #{license_image,jdbcType=VARCHAR},
+      </if>
+      <if test="docking_way != null">
+        #{docking_way,jdbcType=INTEGER},
+      </if>
+      <if test="settlement_way != null">
+        #{settlement_way,jdbcType=INTEGER},
+      </if>
+      <if test="profit != null">
+        #{profit,jdbcType=VARCHAR},
+      </if>
+      <if test="payee != null">
+        #{payee,jdbcType=VARCHAR},
+      </if>
+      <if test="bank_deposit != null">
+        #{bank_deposit,jdbcType=VARCHAR},
+      </if>
+      <if test="bank_account != null">
+        #{bank_account,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null">
+        #{update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="last_time != null">
+        #{last_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="is_deleted != null">
+        #{is_deleted,jdbcType=INTEGER},
+      </if>
+      <if test="enable_status != null">
+        #{enable_status,jdbcType=INTEGER},
+      </if>
+      <if test="ssp_id != null">
+        #{ssp_id,jdbcType=BIGINT},
+      </if>
+      <if test="refuse != null">
+        #{refuse,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mk.ad.vo.AdminSspAccountExample" resultType="java.lang.Long">
+    select count(*) from admin_ssp_account
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update admin_ssp_account
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.user_id != null">
+        user_id = #{record.user_id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.company_name != null">
+        company_name = #{record.company_name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.company_abbreviation != null">
+        company_abbreviation = #{record.company_abbreviation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        `status` = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.company_type != null">
+        company_type = #{record.company_type,jdbcType=INTEGER},
+      </if>
+      <if test="record.license_number != null">
+        license_number = #{record.license_number,jdbcType=VARCHAR},
+      </if>
+      <if test="record.due_date != null">
+        due_date = #{record.due_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.organization_code != null">
+        organization_code = #{record.organization_code,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shareholder != null">
+        shareholder = #{record.shareholder,jdbcType=VARCHAR},
+      </if>
+      <if test="record.license_image != null">
+        license_image = #{record.license_image,jdbcType=VARCHAR},
+      </if>
+      <if test="record.docking_way != null">
+        docking_way = #{record.docking_way,jdbcType=INTEGER},
+      </if>
+      <if test="record.settlement_way != null">
+        settlement_way = #{record.settlement_way,jdbcType=INTEGER},
+      </if>
+      <if test="record.profit != null">
+        profit = #{record.profit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payee != null">
+        payee = #{record.payee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bank_deposit != null">
+        bank_deposit = #{record.bank_deposit,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bank_account != null">
+        bank_account = #{record.bank_account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.create_time != null">
+        create_time = #{record.create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.update_time != null">
+        update_time = #{record.update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.last_time != null">
+        last_time = #{record.last_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.is_deleted != null">
+        is_deleted = #{record.is_deleted,jdbcType=INTEGER},
+      </if>
+      <if test="record.enable_status != null">
+        enable_status = #{record.enable_status,jdbcType=INTEGER},
+      </if>
+      <if test="record.ssp_id != null">
+        ssp_id = #{record.ssp_id,jdbcType=BIGINT},
+      </if>
+      <if test="record.refuse != null">
+        refuse = #{record.refuse,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update admin_ssp_account
+    set id = #{record.id,jdbcType=BIGINT},
+      user_id = #{record.user_id,jdbcType=VARCHAR},
+      company_name = #{record.company_name,jdbcType=VARCHAR},
+      company_abbreviation = #{record.company_abbreviation,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=INTEGER},
+      company_type = #{record.company_type,jdbcType=INTEGER},
+      license_number = #{record.license_number,jdbcType=VARCHAR},
+      due_date = #{record.due_date,jdbcType=TIMESTAMP},
+      organization_code = #{record.organization_code,jdbcType=VARCHAR},
+      shareholder = #{record.shareholder,jdbcType=VARCHAR},
+      license_image = #{record.license_image,jdbcType=VARCHAR},
+      docking_way = #{record.docking_way,jdbcType=INTEGER},
+      settlement_way = #{record.settlement_way,jdbcType=INTEGER},
+      profit = #{record.profit,jdbcType=VARCHAR},
+      payee = #{record.payee,jdbcType=VARCHAR},
+      bank_deposit = #{record.bank_deposit,jdbcType=VARCHAR},
+      bank_account = #{record.bank_account,jdbcType=VARCHAR},
+      create_time = #{record.create_time,jdbcType=TIMESTAMP},
+      update_time = #{record.update_time,jdbcType=TIMESTAMP},
+      last_time = #{record.last_time,jdbcType=TIMESTAMP},
+      is_deleted = #{record.is_deleted,jdbcType=INTEGER},
+      enable_status = #{record.enable_status,jdbcType=INTEGER},
+      ssp_id = #{record.ssp_id,jdbcType=BIGINT},
+      refuse = #{record.refuse,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mk.ad.vo.AdminSspAccount">
+    update admin_ssp_account
+    <set>
+      <if test="user_id != null">
+        user_id = #{user_id,jdbcType=VARCHAR},
+      </if>
+      <if test="company_name != null">
+        company_name = #{company_name,jdbcType=VARCHAR},
+      </if>
+      <if test="company_abbreviation != null">
+        company_abbreviation = #{company_abbreviation,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="company_type != null">
+        company_type = #{company_type,jdbcType=INTEGER},
+      </if>
+      <if test="license_number != null">
+        license_number = #{license_number,jdbcType=VARCHAR},
+      </if>
+      <if test="due_date != null">
+        due_date = #{due_date,jdbcType=TIMESTAMP},
+      </if>
+      <if test="organization_code != null">
+        organization_code = #{organization_code,jdbcType=VARCHAR},
+      </if>
+      <if test="shareholder != null">
+        shareholder = #{shareholder,jdbcType=VARCHAR},
+      </if>
+      <if test="license_image != null">
+        license_image = #{license_image,jdbcType=VARCHAR},
+      </if>
+      <if test="docking_way != null">
+        docking_way = #{docking_way,jdbcType=INTEGER},
+      </if>
+      <if test="settlement_way != null">
+        settlement_way = #{settlement_way,jdbcType=INTEGER},
+      </if>
+      <if test="profit != null">
+        profit = #{profit,jdbcType=VARCHAR},
+      </if>
+      <if test="payee != null">
+        payee = #{payee,jdbcType=VARCHAR},
+      </if>
+      <if test="bank_deposit != null">
+        bank_deposit = #{bank_deposit,jdbcType=VARCHAR},
+      </if>
+      <if test="bank_account != null">
+        bank_account = #{bank_account,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="update_time != null">
+        update_time = #{update_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="last_time != null">
+        last_time = #{last_time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="is_deleted != null">
+        is_deleted = #{is_deleted,jdbcType=INTEGER},
+      </if>
+      <if test="enable_status != null">
+        enable_status = #{enable_status,jdbcType=INTEGER},
+      </if>
+      <if test="ssp_id != null">
+        ssp_id = #{ssp_id,jdbcType=BIGINT},
+      </if>
+      <if test="refuse != null">
+        refuse = #{refuse,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mk.ad.vo.AdminSspAccount">
+    update admin_ssp_account
+    set user_id = #{user_id,jdbcType=VARCHAR},
+      company_name = #{company_name,jdbcType=VARCHAR},
+      company_abbreviation = #{company_abbreviation,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=INTEGER},
+      company_type = #{company_type,jdbcType=INTEGER},
+      license_number = #{license_number,jdbcType=VARCHAR},
+      due_date = #{due_date,jdbcType=TIMESTAMP},
+      organization_code = #{organization_code,jdbcType=VARCHAR},
+      shareholder = #{shareholder,jdbcType=VARCHAR},
+      license_image = #{license_image,jdbcType=VARCHAR},
+      docking_way = #{docking_way,jdbcType=INTEGER},
+      settlement_way = #{settlement_way,jdbcType=INTEGER},
+      profit = #{profit,jdbcType=VARCHAR},
+      payee = #{payee,jdbcType=VARCHAR},
+      bank_deposit = #{bank_deposit,jdbcType=VARCHAR},
+      bank_account = #{bank_account,jdbcType=VARCHAR},
+      create_time = #{create_time,jdbcType=TIMESTAMP},
+      update_time = #{update_time,jdbcType=TIMESTAMP},
+      last_time = #{last_time,jdbcType=TIMESTAMP},
+      is_deleted = #{is_deleted,jdbcType=INTEGER},
+      enable_status = #{enable_status,jdbcType=INTEGER},
+      ssp_id = #{ssp_id,jdbcType=BIGINT},
+      refuse = #{refuse,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="upDataSspStatus" parameterType="com.mk.ad.vo.AdminSspAccount">
+    UPDATE admin_ssp_account
+    SET enable_status = #{status}, status = 1
+    WHERE id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="UpdateSspStatus" parameterType="java.util.Map">
+    update admin_ssp_account
+    set status = #{status},refuse = #{refuse}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateSspMoney" parameterType="java.util.Map">
+    update admin_ssp_account set payee = #{payee} , bank_deposit = #{bankDeposit} , bank_account = #{bankAccount} where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="adminSelectSspCompanyName" parameterType="com.mk.ad.vo.Request.AdminClientIndexDTO" resultType="java.lang.String">
+    SELECT company_name
+    FROM admin_ssp_account asa
+    WHERE asa.id = #{ssp_id}
+  </select>
+  <select id="selectAccount" parameterType="java.lang.Long" resultMap="BaseResultMap">
+   SELECT DISTINCT asa.id AS id,
+    asa.company_name as company_name
+    FROM admin_ssp_account asa
+    LEFT JOIN ssp_media sm ON sm.user_id = asa.user_id
+    where sm.id = #{id}
+  </select>
+  <select id="sspSelectAll" parameterType="com.mk.ad.vo.AdminSspAccount" resultMap="BaseResultMap">
+    select
+    asa.id ,
+    asa.company_name
+    from admin_ssp_account asa
+  </select>
+</mapper>

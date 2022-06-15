@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mk.ad.mapper.AdvertisingAllianceMapper">
+  <resultMap id="BaseResultMap" type="com.mk.ad.vo.AdvertisingAlliance">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="upper_id" jdbcType="INTEGER" property="upper_id" />
+    <result column="advert_name" jdbcType="VARCHAR" property="advert_name" />
+    <result column="advert_id" jdbcType="VARCHAR" property="advert_id" />
+    <result column="size" jdbcType="VARCHAR" property="size" />
+    <result column="os_type" jdbcType="VARCHAR" property="os_type" />
+    <result column="app_id" jdbcType="VARCHAR" property="app_id" />
+    <result column="app_name" jdbcType="VARCHAR" property="app_name" />
+    <result column="ad_slot_type" jdbcType="VARCHAR" property="ad_slot_type" />
+    <result column="app_bundle" jdbcType="VARCHAR" property="app_bundle" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="create_time" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, upper_id, advert_name, advert_id, `size`, os_type, app_id, app_name, ad_slot_type, 
+    app_bundle, app_version, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.mk.ad.vo.AdvertisingAllianceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from advertising_alliance
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from advertising_alliance
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from advertising_alliance
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.mk.ad.vo.AdvertisingAllianceExample">
+    delete from advertising_alliance
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mk.ad.vo.AdvertisingAlliance" useGeneratedKeys="true">
+    insert into advertising_alliance (upper_id, advert_name, advert_id, 
+      `size`, os_type, app_id, 
+      app_name, ad_slot_type, app_bundle, 
+      create_time)
+    values (#{upper_id,jdbcType=INTEGER}, #{advert_name,jdbcType=VARCHAR}, #{advert_id,jdbcType=VARCHAR}, 
+      #{size,jdbcType=VARCHAR}, #{os_type,jdbcType=VARCHAR}, #{app_id,jdbcType=VARCHAR}, 
+      #{app_name,jdbcType=VARCHAR}, #{ad_slot_type,jdbcType=VARCHAR}, #{app_bundle,jdbcType=VARCHAR}, 
+      #{create_time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mk.ad.vo.AdvertisingAlliance" useGeneratedKeys="true">
+    insert into advertising_alliance
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="upper_id != null">
+        upper_id,
+      </if>
+      <if test="advert_name != null">
+        advert_name,
+      </if>
+      <if test="advert_id != null">
+        advert_id,
+      </if>
+      <if test="size != null">
+        `size`,
+      </if>
+      <if test="os_type != null">
+        os_type,
+      </if>
+      <if test="app_id != null">
+        app_id,
+      </if>
+      <if test="app_name != null">
+        app_name,
+      </if>
+      <if test="ad_slot_type != null">
+        ad_slot_type,
+      </if>
+      <if test="app_bundle != null">
+        app_bundle,
+      </if>
+      <if test="app_version != null">
+        app_version,
+      </if>
+      <if test="create_time != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="upper_id != null">
+        #{upper_id,jdbcType=INTEGER},
+      </if>
+      <if test="advert_name != null">
+        #{advert_name,jdbcType=VARCHAR},
+      </if>
+      <if test="advert_id != null">
+        #{advert_id,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="os_type != null">
+        #{os_type,jdbcType=VARCHAR},
+      </if>
+      <if test="app_id != null">
+        #{app_id,jdbcType=VARCHAR},
+      </if>
+      <if test="app_name != null">
+        #{app_name,jdbcType=VARCHAR},
+      </if>
+      <if test="ad_slot_type != null">
+        #{ad_slot_type,jdbcType=VARCHAR},
+      </if>
+      <if test="app_bundle != null">
+        #{app_bundle,jdbcType=VARCHAR},
+      </if>
+      <if test="app_version != null">
+        #{app_version,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        #{create_time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.mk.ad.vo.AdvertisingAllianceExample" resultType="java.lang.Long">
+    select count(*) from advertising_alliance
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update advertising_alliance
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.upper_id != null">
+        upper_id = #{record.upper_id,jdbcType=INTEGER},
+      </if>
+      <if test="record.advert_name != null">
+        advert_name = #{record.advert_name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.advert_id != null">
+        advert_id = #{record.advert_id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.size != null">
+        `size` = #{record.size,jdbcType=VARCHAR},
+      </if>
+      <if test="record.os_type != null">
+        os_type = #{record.os_type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.app_id != null">
+        app_id = #{record.app_id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.app_name != null">
+        app_name = #{record.app_name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ad_slot_type != null">
+        ad_slot_type = #{record.ad_slot_type,jdbcType=VARCHAR},
+      </if>
+      <if test="record.app_bundle != null">
+        app_bundle = #{record.app_bundle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.create_time != null">
+        create_time = #{record.create_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update advertising_alliance
+    set id = #{record.id,jdbcType=BIGINT},
+      upper_id = #{record.upper_id,jdbcType=INTEGER},
+      advert_name = #{record.advert_name,jdbcType=VARCHAR},
+      advert_id = #{record.advert_id,jdbcType=VARCHAR},
+      `size` = #{record.size,jdbcType=VARCHAR},
+      os_type = #{record.os_type,jdbcType=VARCHAR},
+      app_id = #{record.app_id,jdbcType=VARCHAR},
+      app_name = #{record.app_name,jdbcType=VARCHAR},
+      ad_slot_type = #{record.ad_slot_type,jdbcType=VARCHAR},
+      app_bundle = #{record.app_bundle,jdbcType=VARCHAR},
+      create_time = #{record.create_time,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mk.ad.vo.AdvertisingAlliance">
+    update advertising_alliance
+    <set>
+      <if test="upper_id != null">
+        upper_id = #{upper_id,jdbcType=INTEGER},
+      </if>
+      <if test="advert_name != null">
+        advert_name = #{advert_name,jdbcType=VARCHAR},
+      </if>
+      <if test="advert_id != null">
+        advert_id = #{advert_id,jdbcType=VARCHAR},
+      </if>
+      <if test="size != null">
+        `size` = #{size,jdbcType=VARCHAR},
+      </if>
+      <if test="os_type != null">
+        os_type = #{os_type,jdbcType=VARCHAR},
+      </if>
+      <if test="app_id != null">
+        app_id = #{app_id,jdbcType=VARCHAR},
+      </if>
+      <if test="app_name != null">
+        app_name = #{app_name,jdbcType=VARCHAR},
+      </if>
+      <if test="ad_slot_type != null">
+        ad_slot_type = #{ad_slot_type,jdbcType=VARCHAR},
+      </if>
+      <if test="app_bundle != null">
+        app_bundle = #{app_bundle,jdbcType=VARCHAR},
+      </if>
+      <if test="app_version != null">
+        app_version = #{app_version,jdbcType=VARCHAR},
+      </if>
+      <if test="create_time != null">
+        create_time = #{create_time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mk.ad.vo.AdvertisingAlliance">
+    update advertising_alliance
+    set upper_id = #{upper_id,jdbcType=INTEGER},
+      advert_name = #{advert_name,jdbcType=VARCHAR},
+      advert_id = #{advert_id,jdbcType=VARCHAR},
+      `size` = #{size,jdbcType=VARCHAR},
+      os_type = #{os_type,jdbcType=VARCHAR},
+      app_id = #{app_id,jdbcType=VARCHAR},
+      app_name = #{app_name,jdbcType=VARCHAR},
+      ad_slot_type = #{ad_slot_type,jdbcType=VARCHAR},
+      app_bundle = #{app_bundle,jdbcType=VARCHAR},
+      create_time = #{create_time,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectMediaByUpperId"  resultType="java.lang.String" parameterType="java.lang.Integer">
+    SELECT
+      distinct  app_id
+    FROM
+      advertising_alliance
+    where upper_id = #{id}
+  </select>
+  <select id="selectAdslotByUpperId"  resultType="java.lang.String" parameterType="java.lang.Integer">
+    SELECT
+      advert_id
+    FROM
+      advertising_alliance
+    where upper_id = #{id}
+  </select>
+  <select id="adminUnionMapper" parameterType="com.mk.ad.vo.Request.AdminUnionSlotRequestDTO" resultType="java.lang.String">
+    SELECT DISTINCT
+    aa.advert_id AS advert_id
+    FROM
+    advertising_alliance aa
+    LEFT JOIN upper_reaches ur ON ur.id = aa.upper_id
+    where 1=1
+    <if test="dsp_id != null and dsp_id.size > 0">
+      <foreach collection="dsp_id" open="AND ur.id IN (" close=")" item="item" separator=",">
+        #{item}
+      </foreach>
+    </if>
+    <if test="dsp_media != null and dsp_media.size > 0">
+      <foreach collection="dsp_media" open="AND aa.app_id IN (" close=")" item="item" separator=",">
+        #{item}
+      </foreach>
+    </if>
+    <if test="dsp_slot != null and dsp_slot.size > 0">
+      <foreach collection="dsp_slot" open="AND aa.advert_id IN (" close=")" item="item" separator=",">
+        #{item}
+      </foreach>
+    </if>
+  </select>
+  <select id="adminSelectUnionMediaName" parameterType="com.mk.ad.vo.Request.AdminClientIndexDTO" resultType="java.lang.String">
+    SELECT DISTINCT app_name
+    FROM advertising_alliance aa
+    WHERE aa.app_id = #{dsp_media}
+  </select>
+  <select id="adminSelectUnionSlotName" parameterType="com.mk.ad.vo.Request.AdminClientIndexDTO" resultType="java.lang.String">
+    SELECT DISTINCT advert_name
+    FROM advertising_alliance aa
+    WHERE aa.advert_id = #{dsp_slot}
+  </select>
+  <select id="adminIndexUnionMedia" parameterType="com.mk.ad.vo.Request.AdminUnionSlotRequestDTO" resultType="java.util.Map">
+    SELECT DISTINCT
+    aa.app_id as app_id,
+    aa.app_name as app_name
+    FROM
+    advertising_alliance aa
+    LEFT JOIN upper_reaches ur ON ur.id = aa.upper_id
+    WHERE 1=1
+    <if test="dsp_id != null and dsp_id.size > 0">
+      <foreach collection="dsp_id" open="AND ur.id IN (" close=")" item="item" separator=",">
+        #{item}
+      </foreach>
+    </if>
+    <if test="dsp_media != null and dsp_media.size > 0">
+      <foreach collection="dsp_media" open="AND aa.app_id IN (" close=")" item="item" separator=",">
+        #{item}
+      </foreach>
+    </if>
+    <if test="dsp_slot != null and dsp_slot.size > 0">
+      <foreach collection="dsp_slot" open="AND aa.advert_id IN (" close=")" item="item" separator=",">
+        #{item}
+      </foreach>
+    </if>
+  </select>
+  <select id="adminIndexUnionSlot" parameterType="com.mk.ad.vo.Request.AdminUnionSlotRequestDTO" resultType="java.util.Map">
+    SELECT DISTINCT
+    aa.advert_id as advert_id,
+    aa.advert_name as advert_name
+    FROM
+    advertising_alliance aa
+    LEFT JOIN upper_reaches ur ON ur.id = aa.upper_id
+    WHERE 1=1
+    <if test="dsp_id != null and dsp_id.size > 0">
+      <foreach collection="dsp_id" open="AND ur.id IN (" close=")" item="item" separator=",">
+        #{item}
+      </foreach>
+    </if>
+    <if test="dsp_media != null and dsp_media.size > 0">
+      <foreach collection="dsp_media" open="AND aa.app_id IN (" close=")" item="item" separator=",">
+        #{item}
+      </foreach>
+    </if>
+    <if test="dsp_slot != null and dsp_slot.size > 0">
+      <foreach collection="dsp_slot" open="AND aa.advert_id IN (" close=")" item="item" separator=",">
+        #{item}
+      </foreach>
+    </if>
+  </select>
+  <select id="selectMedia" parameterType="com.mk.ad.vo.AdvertisingAlliance" resultType="java.util.Map">
+    SELECT DISTINCT
+    aa.app_id as app_id,
+    aa.app_name as app_name
+    FROM
+    advertising_alliance aa
+  </select>
+  <select id="selectSlot" parameterType="com.mk.ad.vo.AdvertisingAlliance" resultType="java.util.Map">
+    SELECT DISTINCT
+    aa.advert_id as advert_id,
+    aa.advert_name as advert_name
+    FROM
+    advertising_alliance aa
+  </select>
+  <select id="selectidByslotid" parameterType="java.lang.String" resultType="java.lang.String">
+    SELECT
+     id
+    FROM
+      advertising_alliance
+    where
+      advert_id = #{id}
+  </select>
+  <select id="selectSlotName" resultType="java.lang.String">
+    SELECT advert_name FROM advertising_alliance
+  </select>
+  <select id="dspMediaSelectAll" parameterType="com.mk.ad.vo.AdvertisingAlliance" resultMap="BaseResultMap">
+    select DISTINCT
+    app_id ,
+    app_name
+    from advertising_alliance
+  </select>
+  <select id="dspSlotSelectAll" parameterType="com.mk.ad.vo.AdvertisingAlliance" resultMap="BaseResultMap">
+    select DISTINCT
+    advert_id ,
+    advert_name
+    from advertising_alliance
+  </select>
+</mapper>
