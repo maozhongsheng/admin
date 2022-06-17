@@ -12,10 +12,9 @@ spring:
     name: ad-admin
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    #url: jdbc:mysql://172.21.0.15:33061/tianzhuo_ad_data?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
-    url: jdbc:mysql://49.232.91.191:33061/tianzhuo_ad_data?autoReconnect=true
-    username: tianzhuo_admin
-    password: Tianzhuo2021
+    url: jdbc:mysql://172.27.117.22:3306/ad_sp?autoReconnect=true&serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: maofather147
     hikari:
       maximum-pool-size: 30
       minimum-idle: 10
@@ -57,21 +56,21 @@ tencent:
 
 
 
-  kafka:
-    bootstrap-servers: 47.104.173.250:9092
-    template:
-      default-topic: mykafka #topic 名
-      listener:
-        concurrency: 5 #指定listener 容器中的线程数，用于提高并发量
-      consumer:
-        group-id: myGroup # 指定默认消费者group id
-        client-id: 200
-        max-poll-records: 200
-        auto-offset-reset: earliest # 最早未被消费的offset
-      producer:
-        batch-size: 1000 # 每次批量发送消息的数量
-        retries: 3
-        client-id: 200
+#  kafka:
+#    bootstrap-servers: 47.104.173.250:9092
+#    template:
+#      default-topic: mykafka #topic 名
+#      listener:
+#        concurrency: 5 #指定listener 容器中的线程数，用于提高并发量
+#      consumer:
+#        group-id: myGroup # 指定默认消费者group id
+#        client-id: 200
+#        max-poll-records: 200
+#        auto-offset-reset: earliest # 最早未被消费的offset
+#      producer:
+#        batch-size: 1000 # 每次批量发送消息的数量
+#        retries: 3
+#        client-id: 200
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
@@ -100,7 +99,7 @@ logging:
   path: logs
   level:
     root: info
-   # com.tianzhuo.ad.mapper: debug
+   # com.mk.ad.mapper: debug
 
 ribbon:
   ReadTimeout: 12000
